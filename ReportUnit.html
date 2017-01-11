@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReportUnit</title>
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<link rel="stylesheet" href="css/ReportUnitStyle.css">
+	<!-- Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div class="header light-blue z-depth-1">
+		<a id="menu" data-activates="slide-out" class="headerIcon waves-effect waves-light left" href="javascript:void(0)">
+			<i class="material-icons" title="Menu">menu</i>
+		</a>
+		<a id="runInfo" data-position="bottom"
+		class="headerIcon waves-effect waves-light right tooltipped"
+		href="#runInfoModal" data-tooltip="Run info">
+			<i class="material-icons">info_outline</i>
+		</a>
+	</div>
+	<ul id="slide-out" class="side-nav">
+		<p>Test Reports</p>
+		<li>
+        <a href="javascript:void(0)" class="waves-effect waves-light active">
+			<i class="material-icons">assignment</i>Index
+		</a>
+		</li>
+		<li>
+        <a href="javascript:void(0)" class="waves-effect waves-light">
+			<i class="material-icons">assignment</i>TestResultCustomerPage
+		</a>
+		</li>
+		<li>
+        <a href="javascript:void(0)" class="waves-effect waves-light">
+			<i class="material-icons">assignment</i>TestResultProductPage
+		</a>
+		</li>
+		<li>
+        <a href="javascript:void(0)" class="waves-effect waves-light">
+			<i class="material-icons">assignment</i>TestResultUserPage
+		</a>
+		</li>
+		<li>
+        <a href="javascript:void(0)" class="waves-effect waves-light">
+			<i class="material-icons">assignment</i>TestResultRolePage
+		</a>
+		</li>
+	</ul>
+	<div class="main-content">
+		<ul class="row collapsible" data-collapsible="expandable">
+			<li class="col s4">
+				<div class="collapsible-header suiteInfo active">
+				Suite Summary: 9 suites(s) passed, 0 suites(s) failed, 0 others
+				</div>
+				<div class="collapsible-body">
+					<div class="diagram">
+						<p>Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>
+			</li>
+			<li class="col s4">
+				<div class="collapsible-header suiteInfo active">
+					Tests Summary: 82 test(s) passed, 0 test(s) failed, 0 others
+				</div>
+				<div class="collapsible-body">
+					<div class="diagram">
+						<p>Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>
+			</li>
+			<li class="col s4">
+				<div class="collapsible-header suiteInfo active">
+					Pass Percentage: 100%
+				</div>
+				<div class="collapsible-body">
+					<div class="diagram">
+						<div class="progress">
+							<div class="determinate" style="width: 100%"></div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class='right-align'>
+				<a id="hideDiagrams" href="javascript:void(0)" data-position="left" 
+				class="tooltipped" data-delay="500" data-tooltip="Show/Hide diagrams">
+					<i class="material-icons">keyboard_arrow_down</i>
+				</a>
+			</li>
+		</ul>
+		<div id='content' class="content-with-diagrams row">
+			<div class="col s5 suites">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sapien purus, porttitor at nisl varius, tempor congue ligula. Nulla euismod tincidunt tincidunt. Pellentesque mollis ipsum maximus iaculis dignissim. Suspendisse a consequat odio. Mauris porttitor erat erat, eu viverra lectus malesuada sit amet. Sed laoreet justo venenatis, cursus enim nec, volutpat elit. Suspendisse eu imperdiet libero. Sed ac interdum erat. Fusce mattis scelerisque arcu quis gravida. Aliquam erat volutpat. Ut porttitor ante mauris, in consectetur elit dictum nec. Cras maximus eros sem. Nam euismod ipsum vel arcu ornare cursus. Maecenas eget lacinia metus, in blandit nulla.</p>
+				<p>Cras varius pharetra eros in consectetur. Proin viverra quam sed aliquet maximus. In hac habitasse platea dictumst. Sed congue pellentesque tellus, id porta odio. Sed feugiat, neque feugiat sodales iaculis, metus eros iaculis lacus, ut efficitur tellus libero a nibh. Praesent ullamcorper euismod posuere. Curabitur accumsan turpis non dignissim convallis.</p>
+			</div>
+			<div class="col s7 tests">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sapien purus, porttitor at nisl varius, tempor congue ligula. Nulla euismod tincidunt tincidunt. Pellentesque mollis ipsum maximus iaculis dignissim. Suspendisse a consequat odio. Mauris porttitor erat erat, eu viverra lectus malesuada sit amet. Sed laoreet justo venenatis, cursus enim nec, volutpat elit. Suspendisse eu imperdiet libero. Sed ac interdum erat. Fusce mattis scelerisque arcu quis gravida. Aliquam erat volutpat. Ut porttitor ante mauris, in consectetur elit dictum nec. Cras maximus eros sem. Nam euismod ipsum vel arcu ornare cursus. Maecenas eget lacinia metus, in blandit nulla.</p>
+				<p>Cras varius pharetra eros in consectetur. Proin viverra quam sed aliquet maximus. In hac habitasse platea dictumst. Sed congue pellentesque tellus, id porta odio. Sed feugiat, neque feugiat sodales iaculis, metus eros iaculis lacus, ut efficitur tellus libero a nibh. Praesent ullamcorper euismod posuere. Curabitur accumsan turpis non dignissim convallis.</p>
+			</div>
+		</div>
+	</div>
+    <script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	<script src="js/Javascript.js" type="text/javascript"></script>
+	<div id='runInfoModal' class='modal'>
+		<div class='modal-content'>
+			<h4><!--%FILENAME%--> Run info</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>Param</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>TestRunner</td>
+						<td>NUnit</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+  </body>
+</html>

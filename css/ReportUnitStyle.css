@@ -1,0 +1,94 @@
+html, body{
+	height:100%;
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+body{
+	height:calc(100% - 60px);
+}
+
+.header{
+	display:flex;
+	justify-content: space-between;
+	height:40px;
+	width: 100%;
+	position: fixed;
+	z-index:1;
+	top:0;
+}
+
+.headerIcon{
+	color:#fff;
+	margin-top:7px;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+#slide-out>p{
+	font-size:16px;
+	margin: 10px 15px;
+	font-weight:600;
+}
+
+.side-nav a{
+	font-size:14px;
+}
+
+.side-nav a:hover{
+	background-color:#bbdefb;
+}
+
+.side-nav a.active{
+	color:white;
+	background-color:#2979ff;
+}
+
+.side-nav  a  i{
+	font-size:16px;
+	margin-right:10px!important;
+}
+
+.side-nav a.active i{
+	color:white!important;
+}
+
+.main-content{
+	margin-top:60px;
+	width:98%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.suiteInfo{
+	padding:3px!important;
+	font-size: 14px;
+}
+
+.diagram{
+	height:200px;
+	position: relative;
+}
+
+#content{
+	height:30%;
+}
+.content-with-diagrams{
+    height: calc(100% - (25px + 200px));
+}
+
+.content-without-diagrams{
+    height: calc(100% - (25px));
+}
+
+.suites{
+	min-height:100%;
+	background-color: aqua;
+}
+
+.tests{
+	min-height:100%;
+	background-color:green;
+}
+
