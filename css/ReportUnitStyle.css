@@ -71,24 +71,8 @@ body{
 	position: relative;
 }
 
-#content{
-	height:30%;
-}
-.content-with-diagrams{
-    height: calc(100% - (25px + 200px));
+.test-suites{
+	padding:10px;
 }
 
-.content-without-diagrams{
-    height: calc(100% - (25px));
-}
-
-.suites{
-	min-height:100%;
-	background-color: aqua;
-}
-
-.tests{
-	min-height:100%;
-	background-color:green;
-}
 
