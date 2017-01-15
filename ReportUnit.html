@@ -53,7 +53,7 @@
 	<div class="main-content">
 		<ul class="row collapsible" data-collapsible="expandable">
 			<li class="col s4">
-				<div class="collapsible-header suiteInfo active">
+				<div class="collapsible-header total-suite-info active">
 				Suite Summary: 9 suites(s) passed, 0 suites(s) failed, 0 others
 				</div>
 				<div class="collapsible-body">
@@ -63,7 +63,7 @@
 				</div>
 			</li>
 			<li class="col s4">
-				<div class="collapsible-header suiteInfo active">
+				<div class="collapsible-header total-suite-info active">
 					Tests Summary: 82 test(s) passed, 0 test(s) failed, 0 others
 				</div>
 				<div class="collapsible-body">
@@ -73,7 +73,7 @@
 				</div>
 			</li>
 			<li class="col s4">
-				<div class="collapsible-header suiteInfo active">
+				<div class="collapsible-header total-suite-info active">
 					Pass Percentage: 100%
 				</div>
 				<div class="collapsible-body">
@@ -91,43 +91,50 @@
 				</a>
 			</li>
 		</ul>
-		<div id='content' class="content-with-diagrams row">
-			<div class="col s5">
-				<div class="z-depth-1 test-suites">
-					<table class="highlight">
-						<thead>
-							<th>
-								Test suite name
-							</th>
-							<th>
-								Status
-							</th>
-							<th>
-								Details
-							</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									C1_CustomerSearchTests
-								</td>
-								<td>
-									passed
-								</td>
-								<td>
-									info
-								</td>
-							</tr>
-						</tbody>
-					</table>
+		<div id='content' class="row">
+			<div class="col s5 test-suites-column">
+				<div class="z-depth-2 test-suites">
+					<div class="row">
+						<div class="col s7">
+						Test suite name
+						</div>
+						<div class="col s3 center-align">
+						Status
+						</div>
+						<div class="col s2 center-align">
+						Details
+						</div>
+					</div>
+					<div class="row suite-info suite-active waves-effect">
+						<div class="col s7 suite-name truncate" title="C1_CustomerSearchTests">
+						C1_CustomerSearchTests
+						</div>
+						<div class="col s3 center-align">
+							<div class="passed">
+							</div>
+						</div>
+						<div class="col s2 center-align">
+							<a href="javascript:void(0)" class="suite-details-button">
+								<i class="material-icons">info</i>
+							</a>
+							<div class="suite-details hide">
+								<span class="suite-start-time">00:00 am</span>
+								<span class="suite-end-time">00:01 am</span>
+								<span class="total-duration">00:01 m</span>
+								<span class="test-suite-link">http://aaa.ru</span>
+							</div>
+						</div>
+						<div class="test-info hide">
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col s7 tests">
-				<div>
+			<div class="col s7 tests z-depth-2">
+					<div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sapien purus, porttitor at nisl varius, tempor congue ligula. Nulla euismod tincidunt tincidunt. Pellentesque mollis ipsum maximus iaculis dignissim. Suspendisse a consequat odio. Mauris porttitor erat erat, eu viverra lectus malesuada sit amet. Sed laoreet justo venenatis, cursus enim nec, volutpat elit. Suspendisse eu imperdiet libero. Sed ac interdum erat. Fusce mattis scelerisque arcu quis gravida. Aliquam erat volutpat. Ut porttitor ante mauris, in consectetur elit dictum nec. Cras maximus eros sem. Nam euismod ipsum vel arcu ornare cursus. Maecenas eget lacinia metus, in blandit nulla.</p>
 						<p>Cras varius pharetra eros in consectetur. Proin viverra quam sed aliquet maximus. In hac habitasse platea dictumst. Sed congue pellentesque tellus, id porta odio. Sed feugiat, neque feugiat sodales iaculis, metus eros iaculis lacus, ut efficitur tellus libero a nibh. Praesent ullamcorper euismod posuere. Curabitur accumsan turpis non dignissim convallis.</p>			
+					</div>
 				</div>
-			</div>
 		</div>
 	</div>
     <script	src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -158,11 +165,26 @@
 	</div>
 	<div id='suiteInfoDynamicModal' class='modal'>
 		<div class='modal-content'>
-			<table>
-				<tbody>
+			<h4 id="suiteName"></h4>
+			<table class="bordered">
+				<tbody >
 					<tr>
-						<td>Start</td>
-						<td>10:03</td>
+						<td class="bold">Start time</td>
+						<td id="suiteStartTime"></td>
+					</tr>
+					<tr>
+						<td class="bold">End time</td>
+						<td id="suiteEndTime"></td>
+					</tr>
+					<tr>
+						<td class="bold">Total duration</td>
+						<td id="totalDuration"></td>
+					</tr>
+					<tr>
+						<td class="bold">Test suite link</td>
+						<td id="testSuiteLink">
+							<a href="">test suite link</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

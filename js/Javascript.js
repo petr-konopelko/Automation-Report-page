@@ -6,7 +6,7 @@ $('#menu').sideNav();
 
 $('#hideDiagrams').click(function(){
 	var isDiagramDisplayed = isDiagramsDisplayed();
-	var diagrams = $('.suiteInfo');
+	var diagrams = $('.total-suite-info');
 	if(isDiagramDisplayed){
 		collapseAll();
 		$('#hideDiagrams i').css('transform', 'rotate(90deg)');
@@ -17,19 +17,31 @@ $('#hideDiagrams').click(function(){
 	}
 });
 
-function changeContentHeight(isDiagramsDisplayed){
-	var contentBlock = $('#content');
-	var withDiagramClass = 'content-with-diagrams';
-	var withoutDiagramClass = 'content-without-diagrams';
-	if(isDiagramsDisplayed){
-		contentBlock.removeClass(withoutDiagramClass);
-		contentBlock.addClass(withDiagramClass);
-	}
-	else{
-		contentBlock.removeClass(withDiagramClass);
-		contentBlock.addClass(withoutDiagramClass);
-	}
-};
+$('.suite-details-button').click(function(e){
+	e.stopPropagation();
+	var suiteInfo = $(this).closest('.suite-info');
+	var	suiteDetails = getSuiteDetails(suiteInfo);
+	updateDynamicModalSuiteDetails(suiteDetails);
+	$('#suiteInfoDynamicModal').modal('open');
+});
+
+function getSuiteDetails(suiteInfoElement){
+	var suiteDetails = new Object();
+	suiteDetails.suiteName = suiteInfoElement.children('.suite-name').text();
+	suiteDetails.startTime = suiteInfoElement.find('.suite-start-time').text();
+	suiteDetails.endTime = suiteInfoElement.find('.suite-end-time').text();
+	suiteDetails.totalDuration = suiteInfoElement.find('.total-duration').text();
+	suiteDetails.suiteLink = suiteInfoElement.find('.test-suite-link').text();
+	return suiteDetails;
+}
+
+function updateDynamicModalSuiteDetails(suiteDetails){
+	$('#suiteName').text(suiteDetails.suiteName);
+	$('#suiteStartTime').text(suiteDetails.startTime);
+	$('#suiteEndTime').text(suiteDetails.endTime);
+	$('#totalDuration').text(suiteDetails.totalDuration);
+	$('#testSuiteLink > a').attr('href', suiteDetails.suiteLink);
+}
 
 function changeIcon(isDiagramsDisplayed){
 	var icon = $("#hideDiagrams > i");
@@ -45,7 +57,7 @@ function changeIcon(isDiagramsDisplayed){
 
 function isDiagramsDisplayed(){
 	var isDiagramDisplayed = false;
-	var diagramElements = $('.suiteInfo');
+	var diagramElements = $('.total-suite-info');
 	diagramElements.each(function(index){
 		var diagram = $(this);
 		if(diagram.hasClass('active')){
@@ -68,4 +80,6 @@ function collapseAll(){
   $(".collapsible").collapsible({accordion: true});
   $(".collapsible").collapsible({accordion: false});
 }
+
+
 

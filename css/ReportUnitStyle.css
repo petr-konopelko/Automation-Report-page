@@ -61,7 +61,7 @@ body{
 	margin-right:auto;
 }
 
-.suiteInfo{
+.total-suite-info{
 	padding:3px!important;
 	font-size: 14px;
 }
@@ -71,8 +71,53 @@ body{
 	position: relative;
 }
 
-.test-suites{
-	padding:10px;
+.test-suites-column{
+	padding-left:0!important;
+	padding-right:15px!important;
 }
+
+.test-suites .suite-info:not(.suite-active):hover{
+	background-color:#eeeeee;
+}
+
+.test-suites .row:nth-child(1){
+	font-weight:600;
+}
+
+.test-suites .row{
+	padding:10px 15px;
+	margin:0;
+}
+
+
+.suite-info{
+	cursor:pointer;
+	display:block!important;
+}
+
+.suite-active{
+	background-color:#bdbdbd;
+}
+
+.hide{
+	display:none!important;
+}
+
+.passed{
+	border:1px solid green;
+	color:green;
+}
+
+.passed:after{
+	content: "passed";
+}
+
+.bold{
+	font-weight:600;
+}
+
+
+
+
 
 
