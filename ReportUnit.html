@@ -95,13 +95,13 @@
 			<div class="col s5 test-suites-column">
 				<div class="z-depth-2 test-suites">
 					<div class="row">
-						<div class="col s7">Test suite name</div>
-						<div class="col s3 center-align">Status</div>
+						<div class="col s8">Test suite name</div>
+						<div class="col s2 center-align">Status</div>
 						<div class="col s2 center-align">Details</div>
 					</div>
-					<div class="row suite-info suite-active waves-effect">
-						<div class="col s7 suite-name truncate" title="C1_CustomerSearchTests">C1_CustomerSearchTests</div>
-						<div class="col s3 center-align">
+					<div class="row suite-info waves-effect">
+						<div class="col s8 suite-name truncate" title="C1_CustomerSearchTests">C1_CustomerSearchTests</div>
+						<div class="col s2 center-align">
 							<div class="passed">
 							</div>
 						</div>
@@ -119,12 +119,67 @@
 						<div class="test-info hide">
 						</div>
 					</div>
+					<div class="row suite-info suite-active waves-effect">
+						<div class="col s8 suite-name truncate" title="C1_CustomerSearchTests">C1_CustomerSearchTests</div>
+						<div class="col s2 center-align">
+							<div class="passed">
+							</div>
+						</div>
+						<div class="col s2 center-align">
+							<a href="javascript:void(0)" class="suite-details-button">
+								<i class="material-icons">info</i>
+							</a>
+							<div class="suite-details hide">
+								<span class="suite-start-time">00:00 am</span>
+								<span class="suite-end-time">00:01 am</span>
+								<span class="total-duration">00:01 m</span>
+								<span class="test-suite-link">http://aaa.ru</span>
+							</div>
+						</div>
+						<div class="test-info hide">
+							<div class="row test">
+								<div class="col s7 test-name-block">
+									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
+									<div class="description hide">Test Description</div>
+								</div>
+								<div class="col s2 center-align">
+									<div class="passed"></div>
+								</div>
+								<div class="col s3 center-align">
+									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
+									<div class="test-error-content hide">
+										<pre class="test-error-message">Test Description</pre>
+										<span class="image-link">http://google.ru</span>
+									</div>
+								</div>
+							</div>
+							<div class="row test">
+								<div class="col s7">
+									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
+									<div class="description hide">Test Description</div>
+								</div>
+								<div class="col s2 center-align">
+									<div class="passed"></div>
+								</div>
+								<div class="col s3 center-align">
+									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
+									<div class="test-error-content hide">
+										<pre class="test-error-message">Test Error</pre>
+										<span class="image-link">http://google.ru</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col s7 tests z-depth-2">
-				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sapien purus, porttitor at nisl varius, tempor congue ligula. Nulla euismod tincidunt tincidunt. Pellentesque mollis ipsum maximus iaculis dignissim. Suspendisse a consequat odio. Mauris porttitor erat erat, eu viverra lectus malesuada sit amet. Sed laoreet justo venenatis, cursus enim nec, volutpat elit. Suspendisse eu imperdiet libero. Sed ac interdum erat. Fusce mattis scelerisque arcu quis gravida. Aliquam erat volutpat. Ut porttitor ante mauris, in consectetur elit dictum nec. Cras maximus eros sem. Nam euismod ipsum vel arcu ornare cursus. Maecenas eget lacinia metus, in blandit nulla.</p>
-					<p>Cras varius pharetra eros in consectetur. Proin viverra quam sed aliquet maximus. In hac habitasse platea dictumst. Sed congue pellentesque tellus, id porta odio. Sed feugiat, neque feugiat sodales iaculis, metus eros iaculis lacus, ut efficitur tellus libero a nibh. Praesent ullamcorper euismod posuere. Curabitur accumsan turpis non dignissim convallis.</p>			
+			<div class="col s7 z-depth-2">
+				<div class="row test-header">
+					<div class="col s7 bold">Test Name</div>
+					<div class="col s2 center-align bold">Status</div>
+					<div class="col s3 center-align bold">Status Message</div>
+				</div>
+				<div id="tests">
 				</div>
 			</div>
 		</div>
@@ -138,7 +193,7 @@
 	<script src="js/Javascript.js" type="text/javascript"></script>
 	<div id='runInfoModal' class='modal'>
 		<div class='modal-content'>
-			<h4><!--%FILENAME%--> Run info</h4>
+			<h5><!--%FILENAME%--> Run info</h5>
 			<table>
 				<thead>
 					<tr>
@@ -157,7 +212,7 @@
 	</div>
 	<div id='suiteInfoDynamicModal' class='modal'>
 		<div class='modal-content'>
-			<h4 id="suiteName"></h4>
+			<h5 id="suiteName"></h5>
 			<table class="bordered">
 				<tbody >
 					<tr>
@@ -175,12 +230,29 @@
 					<tr>
 						<td class="bold">Test suite link</td>
 						<td id="testSuiteLink">
-							<a href="">test suite link</a>
+							<a href="">Link</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<div id='testDescriptionDynamicModal' class='modal'>
+		<div class='modal-content'>
+			<h5 class="test-name"></h5>
+			<h6 class="bold">Description :</h6>
+			<pre id="testDescription"></pre>
+		</div>
+	</div>
+	<div id='testErrorDynamicModal' class='modal'>
+		<div class='modal-content'>
+			<h5 class="test-name"></h5>
+			<h6 class="bold">Error message:</h6>
+			<pre id="errorMessage"></pre>
+			<h6  style="display:inline-block"><span class="bold">Link on image:</span>
+			<a id="linkOnImage" style="margin-left:10px">Link</a></h6>
+		</div>
+	</div>
+	
   </body>
 </html>

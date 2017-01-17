@@ -84,7 +84,7 @@ body{
 	font-weight:600;
 }
 
-.test-suites .row{
+.test-suites .row, .test-header, #tests .row{
 	padding:10px 15px;
 	margin:0;
 }
@@ -99,10 +99,6 @@ body{
 	background-color:#bdbdbd;
 }
 
-.hide{
-	display:none!important;
-}
-
 .passed{
 	border:1px solid green;
 	color:green;
@@ -112,8 +108,27 @@ body{
 	content: "passed";
 }
 
+#tests .row{
+	border-top:1px solid #cfd8dc;
+}
+
+#tests .row .col{
+	border-right:1px solid #cfd8dc;
+}
+
+.error{
+	color:red;
+	
+}
+
 .bold{
 	font-weight:600;
+}
+
+pre{
+	background-color:#f5f5f5;
+	border:1px solid #bdbdbd;
+	padding: 10px 15px;
 }
 
 

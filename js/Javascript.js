@@ -1,5 +1,6 @@
 $(function(){
     $('.modal').modal();
+	updateTestInfo();
   });
 
 $('#menu').sideNav();
@@ -24,6 +25,39 @@ $('.suite-details-button').click(function(e){
 	updateDynamicModalSuiteDetails(suiteDetails);
 	$('#suiteInfoDynamicModal').modal('open');
 });
+
+$('.suite-info').click(function(){
+	var suite = $(this);
+	$('.suite-active').removeClass('suite-active');
+	suite.addClass('suite-active');
+	updateTestInfo();
+});
+
+$('#tests').on('click', '.test-name', function(){
+	var test = $(this);
+	var testName = test.text();
+	var testDescription = test.siblings('.description').text();
+	$('#testDescriptionDynamicModal .test-name').text(testName);
+	$('#testDescription').text(testDescription);
+	$('#testDescriptionDynamicModal').modal('open');
+});
+
+$('#tests').on('click', '.test-error', function(){
+	var testBlock = $(this).closest('.test');
+	var testName = testBlock.find('.test-name').text();
+	var errorMessage = testBlock.find('.test-error-message').text();
+	var linkOnImage = testBlock.find('.image-link').text();
+	var errorModalWindow = $('#testErrorDynamicModal');
+	errorModalWindow.find('.test-name').text(testName);
+	$('#errorMessage').text(errorMessage);
+	$('#linkOnImage').attr('href', linkOnImage);
+	errorModalWindow.modal('open');
+});
+
+function updateTestInfo(){
+	var testInfo = $('.suite-active').children('.test-info').html();
+	$('#tests').html(testInfo);
+}
 
 function getSuiteDetails(suiteInfoElement){
 	var suiteDetails = new Object();
