@@ -104,10 +104,6 @@ body{
 	color:green;
 }
 
-.passed:after{
-	content: "passed";
-}
-
 #tests .row{
 	border-top:1px solid #cfd8dc;
 }
