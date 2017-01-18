@@ -1,6 +1,6 @@
 $(function(){
     $('.modal').modal();
-	updateTestInfo();
+	updateTestInfoFirstTime();
   });
 
 $('#menu').sideNav();
@@ -53,6 +53,12 @@ $('#tests').on('click', '.test-error', function(){
 	$('#linkOnImage').attr('href', linkOnImage);
 	errorModalWindow.modal('open');
 });
+
+function updateTestInfoFirstTime(){
+	$('.suite-info').removeClass('suite-active');
+	$('.suite-info').first().addClass('suite-active');
+	updateTestInfo();
+}
 
 function updateTestInfo(){
 	var testInfo = $('.suite-active').children('.test-info').html();
