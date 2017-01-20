@@ -7,47 +7,45 @@
     <title>ReportUnit</title>
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-	<link rel="stylesheet" href="https://cdn.rawgit.com/petr-konopelko/Automation-Report-page/7c574e57/css/ReportUnitStyle.css">
+	<link rel="stylesheet" href="css/ReportUnitStyle.css">
 	<!-- Fonts -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <div class="header light-blue z-depth-1">
-		<a id="menu" data-activates="slide-out" class="headerIcon waves-effect waves-light left" href="javascript:void(0)">
-			<i class="material-icons" title="Menu">menu</i>
-		</a>
+    <section class="header light-blue z-depth-1">
+		<div class="headerIcon">
+			<a id="menu" data-activates="slide-out" class="waves-effect waves-light" href="javascript:void(0)">
+				<i class="material-icons" title="Menu">menu</i>
+			</a>
+			<span class="test-suite-name">TestResultCustomerPage</span>
+		</div>
 		<a id="runInfo" data-position="bottom"
-		class="headerIcon waves-effect waves-light right tooltipped"
+		class="headerIcon waves-effect waves-light tooltipped"
 		href="#runInfoModal" data-tooltip="Run info">
 			<i class="material-icons">info_outline</i>
 		</a>
-	</div>
+	</section>
 	<ul id="slide-out" class="side-nav">
 		<p>Test Reports</p>
 		<li>
-        <a href="javascript:void(0)" class="waves-effect waves-light active">
-			<i class="material-icons">assignment</i>Index
-		</a>
+        <a href="javascript:void(0)" class="waves-effect waves-light">
+			<i class="material-icons">assignment</i>Index</a>
 		</li>
 		<li>
         <a href="javascript:void(0)" class="waves-effect waves-light">
-			<i class="material-icons">assignment</i>TestResultCustomerPage
-		</a>
+			<i class="material-icons">assignment</i>TestResultCustomerPage</a>
 		</li>
 		<li>
         <a href="javascript:void(0)" class="waves-effect waves-light">
-			<i class="material-icons">assignment</i>TestResultProductPage
-		</a>
+			<i class="material-icons">assignment</i>TestResultProductPage</a>
 		</li>
 		<li>
         <a href="javascript:void(0)" class="waves-effect waves-light">
-			<i class="material-icons">assignment</i>TestResultUserPage
-		</a>
+			<i class="material-icons">assignment</i>TestResultUserPage</a>
 		</li>
 		<li>
         <a href="javascript:void(0)" class="waves-effect waves-light">
-			<i class="material-icons">assignment</i>TestResultRolePage
-		</a>
+			<i class="material-icons">assignment</i>TestResultRolePage</a>
 		</li>
 	</ul>
 	<div class="main-content">
@@ -102,8 +100,7 @@
 					<div class="row suite-info waves-effect">
 						<div class="col s8 suite-name truncate" title="C1_CustomerSearchTests">C1_CustomerSearchTests</div>
 						<div class="col s2 center-align">
-							<div class="passed">
-							</div>
+							<div class="passed">passed</div>
 						</div>
 						<div class="col s2 center-align">
 							<a href="javascript:void(0)" class="suite-details-button">
@@ -122,8 +119,7 @@
 					<div class="row suite-info suite-active waves-effect">
 						<div class="col s8 suite-name truncate" title="C1_CustomerSearchTests">C1_CustomerSearchTests</div>
 						<div class="col s2 center-align">
-							<div class="passed">
-							</div>
+							<div class="passed">passed</div>
 						</div>
 						<div class="col s2 center-align">
 							<a href="javascript:void(0)" class="suite-details-button">
@@ -143,7 +139,7 @@
 									<div class="description hide">Test Description</div>
 								</div>
 								<div class="col s2 center-align">
-									<div class="passed"></div>
+									<div class="passed">passed</div>
 								</div>
 								<div class="col s3 center-align">
 									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
@@ -159,7 +155,7 @@
 									<div class="description hide">Test Description</div>
 								</div>
 								<div class="col s2 center-align">
-									<div class="passed"></div>
+									<div class="passed">passed</div>
 								</div>
 								<div class="col s3 center-align">
 									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>

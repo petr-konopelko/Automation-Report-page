@@ -1,6 +1,7 @@
 $(function(){
     $('.modal').modal();
 	updateTestInfoFirstTime();
+	updateActiveMenu();
   });
 
 $('#menu').sideNav();
@@ -58,6 +59,16 @@ function updateTestInfoFirstTime(){
 	$('.suite-info').removeClass('suite-active');
 	$('.suite-info').first().addClass('suite-active');
 	updateTestInfo();
+}
+
+function updateActiveMenu(){
+	var testSuiteName = $('.test-suite-name').text();
+	$('#slide-out a').each(function(){
+		var currentMenu = $(this);
+		if(currentMenu.contents().get(2).nodeValue === testSuiteName){
+			currentMenu.addClass('active');
+		}
+	});
 }
 
 function updateTestInfo(){
