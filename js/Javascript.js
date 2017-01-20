@@ -35,23 +35,30 @@ $('.suite-info').click(function(){
 });
 
 $('#tests').on('click', '.test-name', function(){
-	var test = $(this);
-	var testName = test.text();
-	var testDescription = test.siblings('.description').text();
-	$('#testDescriptionDynamicModal .test-name').text(testName);
-	$('#testDescription').text(testDescription);
-	$('#testDescriptionDynamicModal').modal('open');
+	var testInfo = getTestInfo($(this));
+	var testInfoModalWindow = $('#testinfoDynamicModal');
+	updateTestInfoDynamicModalWindow(testInfo, testInfoModalWindow);
+	testInfoModalWindow.modal('open');
 });
 
 $('#tests').on('click', '.test-error', function(){
 	var testBlock = $(this).closest('.test');
 	var testName = testBlock.find('.test-name').text();
 	var errorMessage = testBlock.find('.test-error-message').text();
-	var linkOnImage = testBlock.find('.image-link').text();
 	var errorModalWindow = $('#testErrorDynamicModal');
 	errorModalWindow.find('.test-name').text(testName);
 	$('#errorMessage').text(errorMessage);
-	$('#linkOnImage').attr('href', linkOnImage);
+	
+	var linkOnImage = testBlock.find('.image-link').text();
+	var linkOnImageBlock = $('#linkOnImage');
+	if(linkOnImage.length > 0){
+		linkOnImageBlock.find('a').attr('href', linkOnImage);
+		showElement(linkOnImageBlock);
+	}
+	else{
+		hideElement(linkOnImageBlock);
+	}
+	
 	errorModalWindow.modal('open');
 });
 
@@ -63,16 +70,16 @@ function updateTestInfoFirstTime(){
 
 function updateActiveMenu(){
 	var testSuiteName = $('.test-suite-name').text();
-	$('#slide-out a').each(function(){
+	$('#slide-out a span').each(function(){
 		var currentMenu = $(this);
-		if(currentMenu.text().search(testSuiteName)>0){
-			currentMenu.addClass('active');
+		if(currentMenu.text() === testSuiteName){
+			currentMenu.parent().addClass('active');
 		}
 	});
 }
 
 function updateTestInfo(){
-	var testInfo = $('.suite-active').children('.test-info').html();
+	var testInfo = $('.suite-active').children('.test-section').html();
 	$('#tests').html(testInfo);
 }
 
@@ -91,7 +98,43 @@ function updateDynamicModalSuiteDetails(suiteDetails){
 	$('#suiteStartTime').text(suiteDetails.startTime);
 	$('#suiteEndTime').text(suiteDetails.endTime);
 	$('#totalDuration').text(suiteDetails.totalDuration);
-	$('#testSuiteLink > a').attr('href', suiteDetails.suiteLink);
+	
+	var testSuiteLink = $('#testSuiteLink');
+	if(suiteDetails.suiteLink.length > 0){
+		$('#testSuiteLink  a').attr('href', suiteDetails.suiteLink);
+		showElement(testSuiteLink);
+	}
+	else{
+		hideElement(testSuiteLink);
+	}
+}
+
+function getTestInfo(testInfoBlock){
+	var testInfo = new Object();
+	testInfo.testName = testInfoBlock.text();
+	var info = testInfoBlock.siblings('.test-info');
+	testInfo.startTime = info.children('.start-time').text();
+	testInfo.endTime = info.children('.end-time').text();
+	testInfo.duration = info.children('.duration').text();
+	testInfo.description = info.children('.description').text();
+	return testInfo;
+}
+
+function updateTestInfoDynamicModalWindow(testInfo, testInfoModalWindow){
+	
+	testInfoModalWindow.find('.test-name').text(testInfo.testName);
+	testInfoModalWindow.find('.start-time').text(testInfo.startTime);
+	testInfoModalWindow.find('.end-time').text(testInfo.endTime);
+	testInfoModalWindow.find('.duration').text(testInfo.duration);
+	
+	var elementDescription = testInfoModalWindow.find('.description');
+	if(testInfo.description.length > 0){
+		$('#testDescription').text(testInfo.description);
+		showElement(elementDescription);
+	}
+	else {
+		hideElement(elementDescription);
+	}
 }
 
 function changeIcon(isDiagramsDisplayed){
@@ -130,6 +173,16 @@ function collapseAll(){
   });
   $(".collapsible").collapsible({accordion: true});
   $(".collapsible").collapsible({accordion: false});
+}
+
+function showElement(element){
+	element.removeClass('hide');
+}
+
+function hideElement(element){
+	if(!element.hasClass('hide')){
+		element.addClass('hide');
+	}
 }
 
 

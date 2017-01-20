@@ -102,13 +102,12 @@ body{
 .suite-info{
 	cursor:pointer;
 	display:block!important;
+	border-top:1px solid #cfd8dc;
 }
 
 .suite-active{
 	background-color:#bdbdbd;
 }
-
-
 
 #tests .row{
 	border-top:1px solid #cfd8dc;
