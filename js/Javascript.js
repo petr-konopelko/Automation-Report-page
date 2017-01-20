@@ -65,7 +65,7 @@ function updateActiveMenu(){
 	var testSuiteName = $('.test-suite-name').text();
 	$('#slide-out a').each(function(){
 		var currentMenu = $(this);
-		if(currentMenu.contents().get(2).nodeValue === testSuiteName){
+		if(currentMenu.text().search(testSuiteName)>0){
 			currentMenu.addClass('active');
 		}
 	});
