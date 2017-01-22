@@ -28,8 +28,6 @@ $('.suite-details-button').click(function(e){
 	$('#suiteInfoDynamicModal').modal('open');
 });
 
-
-
 $('.suite-info').click(function(){
 	var suite = $(this);
 	$('.suite-active').removeClass('suite-active');
