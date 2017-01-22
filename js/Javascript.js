@@ -1,7 +1,8 @@
 $(function(){
     $('.modal').modal();
-	updateTestInfoFirstTime();
+	updateTestInfoDefault();
 	updateActiveMenu();
+	activateDropdowns();
   });
 
 $('#menu').sideNav();
@@ -27,11 +28,13 @@ $('.suite-details-button').click(function(e){
 	$('#suiteInfoDynamicModal').modal('open');
 });
 
+
+
 $('.suite-info').click(function(){
 	var suite = $(this);
 	$('.suite-active').removeClass('suite-active');
 	suite.addClass('suite-active');
-	updateTestInfo();
+	updateTestSection();
 });
 
 $('#tests').on('click', '.test-name', function(){
@@ -62,10 +65,31 @@ $('#tests').on('click', '.test-error', function(){
 	errorModalWindow.modal('open');
 });
 
-function updateTestInfoFirstTime(){
+$('.suite-filter').click(function(){
+	var choice = $(this).attr('suite-status');
+	hideElement($('.suite-info'));
+	showElement($('.suite-'.concat(choice)));
+	updateTestInfoDefault();
+});
+
+$('#resetSuiteFilter').click(function(){
+	showElement($('.suite-info'));
+});
+
+$('#testFilter').on('click', '.test-filter', function(){
+	var choice = $(this).attr('test-status');
+	hideElement($('#tests .test'));
+	showElement($('#tests .test-'.concat(choice)));
+});
+
+$('#resetTestFilter').click(function(){
+	showElement($('#tests .test'));
+});
+
+function updateTestInfoDefault(){
 	$('.suite-info').removeClass('suite-active');
-	$('.suite-info').first().addClass('suite-active');
-	updateTestInfo();
+	$('.suite-info:visible:first').addClass('suite-active');
+	updateTestSection();	
 }
 
 function updateActiveMenu(){
@@ -78,9 +102,37 @@ function updateActiveMenu(){
 	});
 }
 
-function updateTestInfo(){
+function updateTestSection(){
 	var testInfo = $('.suite-active').children('.test-section').html();
 	$('#tests').html(testInfo);
+	updateTestFilter();
+}
+
+function updateTestFilter(){
+	var statuses = getAllowedStatuses();
+	updateValuesInFilter(statuses);
+}
+
+function getAllowedStatuses(){
+	var statuses = [];
+	var statusesElement = $('#tests .test-status').each(function(){
+		var currentStatus = $(this).text();
+		if(jQuery.inArray(currentStatus, statuses) === -1){
+			statuses.push(currentStatus);
+		}
+	});
+	return statuses;
+}
+
+function updateValuesInFilter(alowedStatuses){
+	var suiteFilterElement = $('#testFilter');
+	suiteFilterElement.empty();
+	
+	var testStatusesHtml = [];
+	alowedStatuses.forEach(function(item){
+		testStatusesHtml.push("<li><a class='test-filter' test-status='" + item + "' href='javascript:void(0)'>" + item + "</a></li>");
+	});
+	suiteFilterElement.html(testStatusesHtml.join('\n'));
 }
 
 function getSuiteDetails(suiteInfoElement){
@@ -162,6 +214,13 @@ function isDiagramsDisplayed(){
 	return isDiagramDisplayed;
 };
 
+function activateDropdowns(){
+	$('.dropdown-button').dropdown({
+      belowOrigin: true, // Displays dropdown below the button
+    }
+  );
+}
+
 function expandAll(){
   $(".collapsible-header").addClass("active");
   $(".collapsible").collapsible({accordion: false});
@@ -180,9 +239,7 @@ function showElement(element){
 }
 
 function hideElement(element){
-	if(!element.hasClass('hide')){
-		element.addClass('hide');
-	}
+	element.addClass('hide');
 }
 
 

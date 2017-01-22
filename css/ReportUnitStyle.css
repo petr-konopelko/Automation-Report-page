@@ -85,6 +85,16 @@ body{
 	padding-right:15px!important;
 }
 
+.test-suites, .tests-column{
+	position: relative;
+}
+
+.filter-section{
+	position: absolute;
+	left:50%;
+	top:10px;
+}
+
 .test-suites .suite-info:not(.suite-active):hover{
 	background-color:#eeeeee;
 }
@@ -101,7 +111,7 @@ body{
 
 .suite-info{
 	cursor:pointer;
-	display:block!important;
+	display:block;
 	border-top:1px solid #cfd8dc;
 }
 
@@ -127,6 +137,11 @@ body{
 	color:red;
 }
 
+.skipped{
+	border:1px solid blue;
+	color:blue;
+}
+
 .error{
 	color:red;
 }
@@ -143,6 +158,9 @@ pre{
 	white-space: pre-wrap;
 }
 
+.dropdown-content a{
+	color:black!important;
+}
 
 
 

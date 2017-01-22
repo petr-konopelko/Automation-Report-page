@@ -92,11 +92,19 @@
 		<div id='content' class="row">
 			<div class="col s4 test-suites-column">
 				<div class="z-depth-2 test-suites">
+					<div class="filter-section">
+						<a class="dropdown-button" href="javascript:void(0)" data-activates="suiteFilter"><i class="material-icons">filter_list</i></a>
+						<ul id="suiteFilter" class='dropdown-content'>
+							<li><a class="suite-filter" suite-status="passed" href="javascript:void(0)">passed</a></li>
+							<li><a class="suite-filter" suite-status="failed" href="javascript:void(0)">failed</a></li>
+						</ul>
+						<a id="resetSuiteFilter" href="javascript:void(0)"><i class="material-icons">settings_backup_restore</i></a>
+					</div>
 					<div class="row">
 						<div class="col s9">Test suite name</div>
 						<div class="col s3 center-align">Status</div>
 					</div>
-					<div class="row suite-info waves-effect">
+					<div class="row suite-info waves-effect suite-passed">
 						<div class="col s9 suite-name truncate" title="C1_CustomerSearchTests">
 							<a href="javascript:void(0)" class="suite-details-button">C1_CustomerSearchTests</a>
 						</div>
@@ -110,23 +118,28 @@
 							</div>
 						</div>
 						<div class="test-section hide">
-						</div>
-					</div>
-					<div class="row suite-info suite-active waves-effect">
-						<div class="col s9 suite-name truncate" title="C1_CustomerSearchTests">
-							<a href="javascript:void(0)" class="suite-details-button">C1_CustomerSearchTests</a>
-						</div>
-						<div class="col s3 center-align">
-							<div class="passed">passed</div>
-						</div>
-						<div class="suite-details hide">
-								<span class="suite-start-time">00:00 am</span>
-								<span class="suite-end-time">00:01 am</span>
-								<span class="total-duration">00:01 m</span>
-								<span class="test-suite-link">http://aaa.ru</span>
-						</div>
-						<div class="test-section hide">
-							<div class="row test">
+							<div class="row test test-passed">
+								<div class="col s9">
+									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
+									<div class="test-info hide">
+										<span class="start-time">10:01:10</span>
+										<span class="end-time">10:01:12</span>
+										<span class="duration">12</span>
+										<span class="description"></span>
+									</div>
+								</div>
+								<div class="col s2 center-align">
+									<div class="test-status passed">passed</div>
+								</div>
+								<div class="col s1 center-align">
+									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
+									<div class="test-error-content hide">
+										<pre class="test-error-message">Test Error</pre>
+										<span class="image-link"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row test test-failed">
 								<div class="col s9 test-name-block">
 									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
 									<div class="test-info hide">
@@ -137,7 +150,7 @@
 									</div>
 								</div>
 								<div class="col s2 center-align">
-									<div class="passed">passed</div>
+									<div class="test-status failed">failed</div>
 								</div>
 								<div class="col s1 center-align">
 									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
@@ -147,8 +160,45 @@
 									</div>
 								</div>
 							</div>
-							<div class="row test">
-								<div class="col s8">
+						</div>
+					</div>
+					<div class="row suite-info suite-active waves-effect suite-failed">
+						<div class="col s9 suite-name truncate" title="C1_CustomerSearchTests">
+							<a href="javascript:void(0)" class="suite-details-button">C1_CustomerSearchTests</a>
+						</div>
+						<div class="col s3 center-align">
+							<div class="failed">failed</div>
+						</div>
+						<div class="suite-details hide">
+								<span class="suite-start-time">00:00 am</span>
+								<span class="suite-end-time">00:01 am</span>
+								<span class="total-duration">00:01 m</span>
+								<span class="test-suite-link">http://aaa.ru</span>
+						</div>
+						<div class="test-section hide">
+							<div class="row test test-failed">
+								<div class="col s9 test-name-block">
+									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
+									<div class="test-info hide">
+										<span class="start-time">10:01:10</span>
+										<span class="end-time">10:01:12</span>
+										<span class="duration">12</span>
+										<span class="description">aa</span>
+									</div>
+								</div>
+								<div class="col s2 center-align">
+									<div class="test-status failed">failed</div>
+								</div>
+								<div class="col s1 center-align">
+									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
+									<div class="test-error-content hide">
+										<pre class="test-error-message">Test Description</pre>
+										<span class="image-link">http://google.ru</span>
+									</div>
+								</div>
+							</div>
+							<div class="row test test-passed">
+								<div class="col s9">
 									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
 									<div class="test-info hide">
 										<span class="start-time">10:01:10</span>
@@ -158,9 +208,30 @@
 									</div>
 								</div>
 								<div class="col s2 center-align">
-									<div class="passed">passed</div>
+									<div class="test-status passed">passed</div>
+								</div>
+								<div class="col s1 center-align">
+									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
+									<div class="test-error-content hide">
+										<pre class="test-error-message">Test Error</pre>
+										<span class="image-link"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row test test-skipped">
+								<div class="col s9">
+									<a href="javascript:void(0)" class="test-name">P3_1_CreateproductWithAllFields</a>
+									<div class="test-info hide">
+										<span class="start-time">10:01:10</span>
+										<span class="end-time">10:01:12</span>
+										<span class="duration">12</span>
+										<span class="description"></span>
+									</div>
 								</div>
 								<div class="col s2 center-align">
+									<div class="test-status skipped">skipped</div>
+								</div>
+								<div class="col s1 center-align">
 									<a href="javascript:void(0)" class="test-error"><i class="material-icons error">warning</i></a>
 									<div class="test-error-content hide">
 										<pre class="test-error-message">Test Error</pre>
@@ -172,7 +243,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="col s8 z-depth-2">
+			<div class="col s8 z-depth-2 tests-column">
+				<div class="filter-section">
+					<a class="dropdown-button" href="javascript:void(0)" data-activates="testFilter"><i class="material-icons">filter_list</i></a>
+					<ul id="testFilter" class='dropdown-content'>
+						<li><a class="test-filter" test-status="passed" href="javascript:void(0)">passed</a></li>
+						<li><a class="test-filter" test-status="failed" href="javascript:void(0)">failed</a></li>
+					</ul>
+					<a id="resetTestFilter" href="javascript:void(0)"><i class="material-icons">settings_backup_restore</i></a>
+				</div>
 				<div class="row test-header">
 					<div class="col s9 bold">Test Name</div>
 					<div class="col s2 center-align bold">Status</div>
