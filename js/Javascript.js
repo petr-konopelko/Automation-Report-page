@@ -68,21 +68,36 @@ $('.suite-filter').click(function(){
 	hideElement($('.suite-info'));
 	showElement($('.suite-'.concat(choice)));
 	updateTestInfoDefault();
+	changeColorIconFilterActive($(this));
 });
 
 $('#resetSuiteFilter').click(function(){
 	showElement($('.suite-info'));
+	changeColorIconFilterInactive($(this));
 });
 
 $('#testFilter').on('click', '.test-filter', function(){
 	var choice = $(this).attr('test-status');
 	hideElement($('#tests .test'));
 	showElement($('#tests .test-'.concat(choice)));
+	changeColorIconFilterActive($(this));
 });
 
 $('#resetTestFilter').click(function(){
 	showElement($('#tests .test'));
+	changeColorIconFilterInactive($(this));
 });
+
+function changeColorIconFilterInactive(clickedElement){
+	clickedElement.parent().find('.dropdown-button').removeClass('disabled');
+	clickedElement.addClass('disabled');
+}
+
+function changeColorIconFilterActive(clickedElement){
+	var filterSection = clickedElement.closest('.filter-section');
+	filterSection.find('.dropdown-button').addClass('disabled');
+	filterSection.find('.clear-filter').removeClass('disabled');
+}
 
 function updateTestInfoDefault(){
 	$('.suite-info').removeClass('suite-active');
@@ -171,7 +186,6 @@ function getTestInfo(testInfoBlock){
 }
 
 function updateTestInfoDynamicModalWindow(testInfo, testInfoModalWindow){
-	
 	testInfoModalWindow.find('.test-name').text(testInfo.testName);
 	testInfoModalWindow.find('.start-time').text(testInfo.startTime);
 	testInfoModalWindow.find('.end-time').text(testInfo.endTime);
