@@ -3,106 +3,18 @@ $(function(){
 	updateTestInfoDefault();
 	updateActiveMenu();
 	activateDropdowns();
+	drawSuiteSummaryDiagramAndUpdateValues();
+	drawTestSummaryDiagram();
+	drawPassPercentageDiagramAndUpdateValue();
   });
 
 $('#menu').sideNav();
 
-$('#hideDiagrams').click(function(){
-	var isDiagramDisplayed = isDiagramsDisplayed();
-	var diagrams = $('.total-suite-info');
-	if(isDiagramDisplayed){
-		collapseAll();
-		$('#hideDiagrams i').css('transform', 'rotate(90deg)');
-	}
-	else{
-		expandAll();
-		$('#hideDiagrams i').css('transform', 'rotate(0deg)');
-	}
-});
-
-$('.suite-details-button').click(function(e){
-	e.stopPropagation();
-	var suiteInfo = $(this).closest('.suite-info');
-	var	suiteDetails = getSuiteDetails(suiteInfo);
-	updateDynamicModalSuiteDetails(suiteDetails);
-	$('#suiteInfoDynamicModal').modal('open');
-});
-
-$('.suite-info').click(function(){
-	var suite = $(this);
-	$('.suite-active').removeClass('suite-active');
-	suite.addClass('suite-active');
-	updateTestSection();
-});
-
-$('#tests').on('click', '.test-name', function(){
-	var testInfo = getTestInfo($(this));
-	var testInfoModalWindow = $('#testinfoDynamicModal');
-	updateTestInfoDynamicModalWindow(testInfo, testInfoModalWindow);
-	testInfoModalWindow.modal('open');
-});
-
-$('#tests').on('click', '.test-error', function(){
-	var testBlock = $(this).closest('.test');
-	var testName = testBlock.find('.test-name').text();
-	var errorMessage = testBlock.find('.test-error-message').text();
-	var errorModalWindow = $('#testErrorDynamicModal');
-	errorModalWindow.find('.test-name').text(testName);
-	$('#errorMessage').text(errorMessage);
-	
-	var linkOnImage = testBlock.find('.image-link').text();
-	var linkOnImageBlock = $('#linkOnImage');
-	if(linkOnImage.length > 0){
-		linkOnImageBlock.find('a').attr('href', linkOnImage);
-		showElement(linkOnImageBlock);
-	}
-	else{
-		hideElement(linkOnImageBlock);
-	}
-	
-	errorModalWindow.modal('open');
-});
-
-$('.suite-filter').click(function(){
-	var choice = $(this).attr('suite-status');
-	hideElement($('.suite-info'));
-	showElement($('.suite-'.concat(choice)));
-	updateTestInfoDefault();
-	changeColorIconFilterActive($(this));
-});
-
-$('#resetSuiteFilter').click(function(){
-	showElement($('.suite-info'));
-	changeColorIconFilterInactive($(this));
-});
-
-$('#testFilter').on('click', '.test-filter', function(){
-	var choice = $(this).attr('test-status');
-	hideElement($('#tests .test'));
-	showElement($('#tests .test-'.concat(choice)));
-	changeColorIconFilterActive($(this));
-});
-
-$('#resetTestFilter').click(function(){
-	showElement($('#tests .test'));
-	changeColorIconFilterInactive($(this));
-});
-
-function changeColorIconFilterInactive(clickedElement){
-	clickedElement.parent().find('.dropdown-button').removeClass('disabled');
-	clickedElement.addClass('disabled');
-}
-
-function changeColorIconFilterActive(clickedElement){
-	var filterSection = clickedElement.closest('.filter-section');
-	filterSection.find('.dropdown-button').addClass('disabled');
-	filterSection.find('.clear-filter').removeClass('disabled');
-}
-
-function updateTestInfoDefault(){
-	$('.suite-info').removeClass('suite-active');
-	$('.suite-info:visible:first').addClass('suite-active');
-	updateTestSection();	
+function activateDropdowns(){
+	$('.dropdown-button').dropdown({
+      belowOrigin: true, // Displays dropdown below the button
+    }
+  );
 }
 
 function updateActiveMenu(){
@@ -115,38 +27,14 @@ function updateActiveMenu(){
 	});
 }
 
-function updateTestSection(){
-	var testInfo = $('.suite-active').children('.test-section').html();
-	$('#tests').html(testInfo);
-	updateTestFilter();
-}
-
-function updateTestFilter(){
-	var statuses = getAllowedStatuses();
-	updateValuesInFilter(statuses);
-}
-
-function getAllowedStatuses(){
-	var statuses = [];
-	var statusesElement = $('#tests .test-status').each(function(){
-		var currentStatus = $(this).text();
-		if(jQuery.inArray(currentStatus, statuses) === -1){
-			statuses.push(currentStatus);
-		}
-	});
-	return statuses;
-}
-
-function updateValuesInFilter(alowedStatuses){
-	var suiteFilterElement = $('#testFilter');
-	suiteFilterElement.empty();
-	
-	var testStatusesHtml = [];
-	alowedStatuses.forEach(function(item){
-		testStatusesHtml.push("<li><a class='test-filter' test-status='" + item + "' href='javascript:void(0)'>" + item + "</a></li>");
-	});
-	suiteFilterElement.html(testStatusesHtml.join('\n'));
-}
+//suite-action
+$('.suite-details-button').click(function(e){
+	e.stopPropagation();
+	var suiteInfo = $(this).closest('.suite-info');
+	var	suiteDetails = getSuiteDetails(suiteInfo);
+	updateDynamicModalSuiteDetails(suiteDetails);
+	$('#suiteInfoDynamicModal').modal('open');
+});
 
 function getSuiteDetails(suiteInfoElement){
 	var suiteDetails = new Object();
@@ -173,6 +61,21 @@ function updateDynamicModalSuiteDetails(suiteDetails){
 		hideElement(testSuiteLink);
 	}
 }
+
+$('.suite-info').click(function(){
+	var suite = $(this);
+	$('.suite-active').removeClass('suite-active');
+	suite.addClass('suite-active');
+	updateTestSection();
+});
+
+//test-action
+$('#tests').on('click', '.test-name', function(){
+	var testInfo = getTestInfo($(this));
+	var testInfoModalWindow = $('#testinfoDynamicModal');
+	updateTestInfoDynamicModalWindow(testInfo, testInfoModalWindow);
+	testInfoModalWindow.modal('open');
+});
 
 function getTestInfo(testInfoBlock){
 	var testInfo = new Object();
@@ -201,17 +104,165 @@ function updateTestInfoDynamicModalWindow(testInfo, testInfoModalWindow){
 	}
 }
 
-function changeIcon(isDiagramsDisplayed){
-	var icon = $("#hideDiagrams > i");
-	var iconClass;
-	if(isDiagramsDisplayed){
-		var iconClass = icon.attr('class').replace('right', 'down');
+$('#tests').on('click', '.test-error', function(){
+	var testBlock = $(this).closest('.test');
+	var testName = testBlock.find('.test-name').text();
+	var errorMessage = testBlock.find('.test-error-message').text();
+	var errorModalWindow = $('#testErrorDynamicModal');
+	errorModalWindow.find('.test-name').text(testName);
+	$('#errorMessage').text(errorMessage);
+	
+	var linkOnImage = testBlock.find('.image-link').text();
+	var linkOnImageBlock = $('#linkOnImage');
+	if(linkOnImage.length > 0){
+		linkOnImageBlock.find('a').attr('href', linkOnImage);
+		showElement(linkOnImageBlock);
 	}
 	else{
-		var iconClass = icon.attr('class').replace('down', 'right');
+		hideElement(linkOnImageBlock);
 	}
-	icon.attr('class', iconClass);
+	
+	errorModalWindow.modal('open');
+});
+
+function updateTestSection(){
+	var testInfo = $('.suite-active').children('.test-section').html();
+	$('#tests').html(testInfo);
+	updateTestFilter();
 }
+
+function updateTestInfoDefault(){
+	$('.suite-info').removeClass('suite-active');
+	$('.suite-info:visible:first').addClass('suite-active');
+	updateTestSection();	
+}
+
+//filters
+$('.suite-filter').click(function(){
+	var choice = $(this).attr('suite-status');
+	hideElement($('.suite-info'));
+	showElement($('.suite-'.concat(choice)));
+	updateTestInfoDefault();
+	changeColorIconFilterActive($(this));
+});
+
+$('#resetSuiteFilter').click(function(){
+	showElement($('.suite-info'));
+	changeColorIconFilterInactive($(this));
+});
+
+
+$('#testFilter').on('click', '.test-filter', function(){
+	var choice = $(this).attr('test-status');
+	hideElement($('#tests .test'));
+	showElement($('#tests .test-'.concat(choice)));
+	changeColorIconFilterActive($(this));
+});
+
+$('#resetTestFilter').click(function(){
+	showElement($('#tests .test'));
+	changeColorIconFilterInactive($(this));
+});
+
+function changeColorIconFilterInactive(clickedElement){
+	clickedElement.parent().find('.dropdown-button').removeClass('disabled');
+	clickedElement.addClass('disabled');
+}
+
+function changeColorIconFilterActive(clickedElement){
+	var filterSection = clickedElement.closest('.filter-section');
+	filterSection.find('.dropdown-button').addClass('disabled');
+	filterSection.find('.clear-filter').removeClass('disabled');
+}
+
+function updateTestFilter(){
+	$('#resetTestFilter').click();
+	var statuses = getAllowedStatuses();
+	updateValuesInFilter(statuses);
+}
+
+function getAllowedStatuses(){
+	var statuses = [];
+	var statusesElement = $('#tests .test-status').each(function(){
+		var currentStatus = $(this).text();
+		if(jQuery.inArray(currentStatus, statuses) === -1){
+			statuses.push(currentStatus);
+		}
+	});
+	return statuses;
+}
+
+function updateValuesInFilter(alowedStatuses){
+	var suiteFilterElement = $('#testFilter');
+	suiteFilterElement.empty();
+	
+	var testStatusesHtml = [];
+	alowedStatuses.forEach(function(item){
+		testStatusesHtml.push("<li><a class='test-filter' test-status='" + item + "' href='javascript:void(0)'>" + item + "</a></li>");
+	});
+	suiteFilterElement.html(testStatusesHtml.join('\n'));
+}
+
+//diagrams
+function drawSuiteSummaryDiagramAndUpdateValues(){
+	var suiteInfo = getInfoForDiagrams(true);
+	updateSuiteSummary(suiteInfo);
+	
+}
+
+function updateSuiteSummary(suiteInfo){
+	var diagrams = $('#diagrams');
+	diagrams.find('.suites-passed').text(suiteInfo.passed);
+	diagrams.find('.suites-failed').text(suiteInfo.failed);
+	diagrams.find('.suites-others').text(suiteInfo.skipped + suiteInfo.inconclusive);
+}
+
+function drawTestSummaryDiagram(){
+		
+}
+	
+function drawPassPercentageDiagramAndUpdateValue(){
+	
+}
+
+function getInfoForDiagrams(isForSuite){
+	var classNamePrefix;
+	if(isForSuite){
+		classNamePrefix = 'suites';
+	}
+	else{
+		classNamePrefix = 'tests';
+	}
+	var suiteInfo = new Object();
+	var suiteInfoElement = $('#suiteInfo');
+	suiteInfo.passed = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-passed'));
+	suiteInfo.failed = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-failed'));
+	suiteInfo.skipped = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-skipped'));
+	suiteInfo.inconclusive = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-inconclusive'));
+	return suiteInfo;
+}
+
+function getValueForDiagramFromElement(element){
+	if(element.length>0){
+		return element.text();
+	}
+	else{
+		return 0;
+	}
+}
+
+$('#hideDiagrams').click(function(){
+	var isDiagramDisplayed = isDiagramsDisplayed();
+	var diagrams = $('.total-suite-info');
+	if(isDiagramDisplayed){
+		collapseAll();
+		$('#hideDiagrams i').css('transform', 'rotate(90deg)');
+	}
+	else{
+		expandAll();
+		$('#hideDiagrams i').css('transform', 'rotate(0deg)');
+	}
+});
 
 function isDiagramsDisplayed(){
 	var isDiagramDisplayed = false;
@@ -226,13 +277,6 @@ function isDiagramsDisplayed(){
 	return isDiagramDisplayed;
 };
 
-function activateDropdowns(){
-	$('.dropdown-button').dropdown({
-      belowOrigin: true, // Displays dropdown below the button
-    }
-  );
-}
-
 function expandAll(){
   $(".collapsible-header").addClass("active");
   $(".collapsible").collapsible({accordion: false});
@@ -246,6 +290,7 @@ function collapseAll(){
   $(".collapsible").collapsible({accordion: false});
 }
 
+//common function
 function showElement(element){
 	element.removeClass('hide');
 }

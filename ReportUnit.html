@@ -49,10 +49,13 @@
 		</li>
 	</ul>
 	<div class="main-content">
-		<ul class="row collapsible" data-collapsible="expandable">
+		<ul id="diagrams" class="row collapsible" data-collapsible="expandable">
 			<li class="col s4">
 				<div class="collapsible-header total-suite-info active">
-				Suite Summary: 9 suites(s) passed, 0 suites(s) failed, 0 others
+					<span class="bold">Suite Summary:</span>
+					<span class="suites-passed"></span> suites(s) passed,
+					<span class="suites-failed"></span> suites(s) failed,
+					<span class="suites-others"></span> others
 				</div>
 				<div class="collapsible-body">
 					<div class="diagram">
@@ -62,7 +65,7 @@
 			</li>
 			<li class="col s4">
 				<div class="collapsible-header total-suite-info active">
-					Tests Summary: 82 test(s) passed, 0 test(s) failed, 0 others
+					<span class="bold">Tests Summary:</span> 82 test(s) passed, 0 test(s) failed, 0 others
 				</div>
 				<div class="collapsible-body">
 					<div class="diagram">
@@ -72,7 +75,8 @@
 			</li>
 			<li class="col s4">
 				<div class="collapsible-header total-suite-info active">
-					Pass Percentage: 100%
+					<span class="bold">Pass Percentage:</span>
+					<span class="pass-percentage"></span>
 				</div>
 				<div class="collapsible-body">
 					<div class="diagram">
@@ -262,14 +266,7 @@
 			</div>
 		</div>
 	</div>
-    <script	src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-	<!--<script src="https://cdn.rawgit.com/petr-konopelko/Automation-Report-page/7c574e57/js/Javascript.js" type="text/javascript"></script>-->
-	<script src="js/Javascript.js"></script>
+    
 	<div id='runInfoModal' class='modal'>
 		<div class='modal-content'>
 			<h5><!--%FILENAME%--> Run info</h5>
@@ -350,6 +347,25 @@
 			<a target="_blank" style="margin-left:10px">Link</a></h6>
 		</div>
 	</div>
-	
+	<div id="suiteInfo" class="hide">
+		<span class="total-suite-amount">9</span>
+        <span class="suites-passed">5</span>
+        <span class="suites-failed">4</span>
+    </div>
+	<div id="testInfo" class="hide">
+        <span class="total-tests-amount">84</span>
+        <span class="tests-passed">79</span>
+        <span class="tests-failed">5</span>
+        <span class="tests-skipped">0</span>
+        <span class="tests-inconclusive">0</span>
+    </div>
+	<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	<!--<script src="https://cdn.rawgit.com/petr-konopelko/Automation-Report-page/7c574e57/js/Javascript.js" type="text/javascript"></script>-->
+	<script src="js/Javascript.js"></script>
   </body>
 </html>
