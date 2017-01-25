@@ -3,9 +3,12 @@ $(function(){
 	updateTestInfoDefault();
 	updateActiveMenu();
 	activateDropdowns();
-	drawSuiteSummaryDiagramAndUpdateValues();
-	drawTestSummaryDiagram();
-	drawPassPercentageDiagramAndUpdateValue();
+	google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(function(){
+		drawSuiteSummaryDiagramAndUpdateValues();
+		drawTestSummaryDiagram();
+		drawPassPercentageDiagramAndUpdateValue();
+	}); 	
   });
 
 $('#menu').sideNav();
@@ -207,7 +210,7 @@ function updateValuesInFilter(alowedStatuses){
 function drawSuiteSummaryDiagramAndUpdateValues(){
 	var suiteInfo = getInfoForDiagrams(true);
 	updateSuiteSummary(suiteInfo);
-	
+	drawSuiteSummaryDiagram(suiteInfo);
 }
 
 function updateSuiteSummary(suiteInfo){
@@ -217,8 +220,41 @@ function updateSuiteSummary(suiteInfo){
 	diagrams.find('.suites-others').text(suiteInfo.skipped + suiteInfo.inconclusive);
 }
 
+function drawSuiteSummaryDiagram(suiteInfo){
+	var data = google.visualization.arrayToDataTable([
+		  ['Status', 'Suite amount'],
+          ['Passed', suiteInfo.passed],
+          ['Failed',  suiteInfo.failed],
+          ['Skipped',  suiteInfo.skipped],
+          ['Inconclusive', suiteInfo.inconclusive],
+        ]);
+
+    var options = {
+          title: 'Suite summary diagram',
+		  colors: ['#43a047', '#f44336', '#1e88e5', '#bdbdbd']
+        };
+
+    var chart = new google.visualization.PieChart(document.getElementById('suiteDiagram'));
+    chart.draw(data, options);
+}
+
 function drawTestSummaryDiagram(){
-		
+	var testInfo = getInfoForDiagrams(false);
+		var data = google.visualization.arrayToDataTable([
+		  ['Status', 'Test amount'],
+          ['Passed', testInfo.passed],
+          ['Failed',  testInfo.failed],
+          ['Skipped',  testInfo.skipped],
+          ['Inconclusive', testInfo.inconclusive],
+        ]);
+
+    var options = {
+          title: 'Test summary diagram',
+		  colors: ['#43a047', '#f44336', '#1e88e5', '#bdbdbd']
+        };
+
+    var chart = new google.visualization.PieChart(document.getElementById('testDiagram'));
+    chart.draw(data, options);
 }
 	
 function drawPassPercentageDiagramAndUpdateValue(){
@@ -234,7 +270,7 @@ function getInfoForDiagrams(isForSuite){
 		classNamePrefix = 'tests';
 	}
 	var suiteInfo = new Object();
-	var suiteInfoElement = $('#suiteInfo');
+	var suiteInfoElement = $('#'+classNamePrefix+'Info');
 	suiteInfo.passed = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-passed'));
 	suiteInfo.failed = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-failed'));
 	suiteInfo.skipped = getValueForDiagramFromElement(suiteInfoElement.find('.'+classNamePrefix+'-skipped'));
@@ -244,7 +280,7 @@ function getInfoForDiagrams(isForSuite){
 
 function getValueForDiagramFromElement(element){
 	if(element.length>0){
-		return element.text();
+		return parseInt(element.text());
 	}
 	else{
 		return 0;
