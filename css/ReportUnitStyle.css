@@ -76,8 +76,16 @@ body{
 }
 
 .diagram{
-	height:200px;
+	height:160px;
 	position: relative;
+}
+
+.percentage-amount{
+	position: absolute;
+	left:50%;
+	top:30%;
+	font-weight:normal;
+	font-size:28px;
 }
 
 .test-suites-column{
@@ -164,6 +172,46 @@ pre{
 
 .disabled{
 	color:#cfd8dc;
+}
+
+.progress-bar-container {
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	height: 15px;
+	margin: 0;
+	/* max-width: 350px; */
+	overflow: hidden;
+	width: 100%;
+	top: 80%;
+	position: absolute;
+}
+.progress-bar-success {
+	background-color: #4caf50 !important;
+}
+
+.progress-bar-failed{
+	background-color: #f4511e !important;
+}
+
+.progress-bar-skip {
+	background-color: #42a5f5 !important;
+}
+
+.progress-bar-inconclusive {
+	background-color: #e0e0e0 !important;
+}
+
+
+
+
+
+.progress-bar{
+	margin:0;
+	padding:0;
+	float:left;
+	height:100%;
+	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
 

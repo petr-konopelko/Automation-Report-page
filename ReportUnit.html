@@ -58,7 +58,9 @@
 					<span class="suites-others"></span> others
 				</div>
 				<div class="collapsible-body">
-					<div id="suiteDiagram" class="diagram">
+					<div class="diagram">
+						<canvas id="suiteDiagram" >
+						</canvas>
 					</div>
 				</div>
 			</li>
@@ -67,17 +69,26 @@
 					<span class="bold">Tests Summary:</span> 82 test(s) passed, 0 test(s) failed, 0 others
 				</div>
 				<div class="collapsible-body">
-					<div id="testDiagram" class="diagram">
+					<div class="diagram">
+						<canvas id="testDiagram">
+						</canvas>
 					</div>
 				</div>
 			</li>
 			<li class="col s4">
 				<div class="collapsible-header total-suite-info active">
 					<span class="bold">Pass Percentage:</span>
-					<span class="pass-percentage"></span>
+					<span class="pass-percentage">70%</span>
 				</div>
 				<div class="collapsible-body">
-					<div id="percentageDiagram" class="diagram">
+					<div class="diagram">
+						<div class="percentage-amount">
+							70%
+						</div>
+						<div id="percentageDiagram" class="progress-bar-container">
+							<span class="progress-bar progress-bar-success" style="width:70%"></span>
+							<span class="progress-bar progress-bar-failed" style="width:30%"></span>
+						</div>
 					</div>
 				</div>
 			</li>
@@ -360,7 +371,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script src="js/Javascript.js"></script>
   </body>
 </html>

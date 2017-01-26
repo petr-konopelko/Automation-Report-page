@@ -3,12 +3,8 @@ $(function(){
 	updateTestInfoDefault();
 	updateActiveMenu();
 	activateDropdowns();
-	google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(function(){
-		drawSuiteSummaryDiagramAndUpdateValues();
-		drawTestSummaryDiagram();
-		drawPassPercentageDiagramAndUpdateValue();
-	}); 	
+	drawSuiteSummaryDiagramAndUpdateValues();
+	drawTestSummaryDiagram();
   });
 
 $('#menu').sideNav();
@@ -221,44 +217,118 @@ function updateSuiteSummary(suiteInfo){
 }
 
 function drawSuiteSummaryDiagram(suiteInfo){
-	var data = google.visualization.arrayToDataTable([
-		  ['Status', 'Suite amount'],
-          ['Passed', suiteInfo.passed],
-          ['Failed',  suiteInfo.failed],
-          ['Skipped',  suiteInfo.skipped],
-          ['Inconclusive', suiteInfo.inconclusive],
-        ]);
-
+	var data = {
+		labels:[
+			'Passed',
+			'Failed',
+			'Skipped',
+			'Inconclusive'
+		],
+		datasets: [
+		{
+			data:[suiteInfo.passed, suiteInfo.failed, suiteInfo.skipped, suiteInfo.inconclusive],
+			 backgroundColor: [
+                '#4caf50',
+                '#f4511e',
+                '#42a5f5',
+				'#e0e0e0'
+            ],
+		}]
+		
+	};
     var options = {
-          title: 'Suite summary diagram',
-		  colors: ['#43a047', '#f44336', '#1e88e5', '#bdbdbd']
-        };
+         animation:{
+			  animateScale:true,
+		  },
+		  legend:{
+			position:'right',
+			usePointStyle:true,
+			labels:{
+				fontSize: 14,
+			}
+		  },
+		  tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                    var tooltipLabel = data.labels[tooltipItem.index];
+                    var tooltipData = allData[tooltipItem.index];
+                    var total = 0;
+                    for (var i in allData) {
+                        total += allData[i];
+                    }
+                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                }
+            }
+        },
+		maintainAspectRatio: false
+    };
 
-    var chart = new google.visualization.PieChart(document.getElementById('suiteDiagram'));
-    chart.draw(data, options);
+	var ctx = $('#suiteDiagram');
+    var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options
+	});
 }
 
 function drawTestSummaryDiagram(){
 	var testInfo = getInfoForDiagrams(false);
-		var data = google.visualization.arrayToDataTable([
-		  ['Status', 'Test amount'],
-          ['Passed', testInfo.passed],
-          ['Failed',  testInfo.failed],
-          ['Skipped',  testInfo.skipped],
-          ['Inconclusive', testInfo.inconclusive],
-        ]);
-
+	var data = {
+		labels:[
+			'Passed',
+			'Failed',
+			'Skipped',
+			'Inconclusive'
+		],
+		datasets: [
+		{
+			data:[testInfo.passed, testInfo.failed, testInfo.skipped, testInfo.inconclusive],
+			 backgroundColor: [
+                '#4caf50',
+                '#f4511e',
+                '#42a5f5',
+				'#e0e0e0'
+            ],
+		}]
+		
+	};
     var options = {
-          title: 'Test summary diagram',
-		  colors: ['#43a047', '#f44336', '#1e88e5', '#bdbdbd']
-        };
+         animation:{
+			  animateScale:true,
+		  },
+		  legend:{
+			position:'right',
+			usePointStyle:true,
+			labels:{
+				fontSize: 14,
+			}
+		  },
+		  tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                    var tooltipLabel = data.labels[tooltipItem.index];
+                    var tooltipData = allData[tooltipItem.index];
+                    var total = 0;
+                    for (var i in allData) {
+                        total += allData[i];
+                    }
+                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                }
+            }
+        },
+		maintainAspectRatio: false
+    };
 
-    var chart = new google.visualization.PieChart(document.getElementById('testDiagram'));
-    chart.draw(data, options);
-}
-	
-function drawPassPercentageDiagramAndUpdateValue(){
-	
+	var ctx = $('#testDiagram');
+    var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options
+	});
 }
 
 function getInfoForDiagrams(isForSuite){
