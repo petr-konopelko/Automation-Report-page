@@ -2,9 +2,11 @@ $(function(){
     $('.modal').modal();
 	updateTestInfoDefault();
 	updateActiveMenu();
+	if(getTestSuiteName() !== "Index"){
 	activateDropdowns();
 	drawSuiteSummaryDiagramAndUpdateValues();
 	drawTestSummaryDiagram();
+	}
   });
 
 $('#menu').sideNav();
@@ -17,13 +19,17 @@ function activateDropdowns(){
 }
 
 function updateActiveMenu(){
-	var testSuiteName = $('.test-suite-name').text();
+	var testSuiteName = getTestSuiteName();
 	$('#slide-out a span').each(function(){
 		var currentMenu = $(this);
 		if(currentMenu.text() === testSuiteName){
 			currentMenu.parent().addClass('active');
 		}
 	});
+}
+
+function getTestSuiteName(){
+	return $('.test-suite-name').text();
 }
 
 //suite-action
