@@ -154,6 +154,10 @@ body{
 	color:red;
 }
 
+.warning{
+	color:#ffc400;
+}
+
 .bold{
 	font-weight:600;
 }
