@@ -21,7 +21,7 @@ function activateDropdowns(){
 }
 
 function updateActiveMenu(){
-	if(isIndexpage()){
+	if(isIndexPage()){
 		$('#slide-out a.executive-summary').addClass('active');
 	}
 	
