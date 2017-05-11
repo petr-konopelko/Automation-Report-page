@@ -136,30 +136,35 @@ body{
 }
 
 .passed{
-	border:1px solid green;
 	color:green;
 }
 
 .failed{
-	border:1px solid red;
 	color:red;
 }
 
 .skipped{
-	border:1px solid blue;
 	color:blue;
 }
 
-.error{
-	color:red;
+.passed-border{
+	border:1px solid green;
 }
 
-.warning{
-	color:#ffc400;
+.failed-border{
+	border:1px solid red;
+}
+
+.skipped-border{
+	border:1px solid blue;
 }
 
 .bold{
 	font-weight:600;
+}
+
+.warning{
+	color:#ffc400;
 }
 
 pre{
