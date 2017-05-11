@@ -231,6 +231,11 @@ pre{
 	background-size: 40px 40px;
 }
 
+.percent-value{
+	position:relative;
+	margin:-2px;
+}
+
 
 
 
