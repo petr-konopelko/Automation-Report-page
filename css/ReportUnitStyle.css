@@ -186,7 +186,6 @@ pre{
 	margin: 0;
 	overflow: hidden;
 	width: 100%;
-	background-size: 40px 40px;
     color: white;
     text-align: center;
     font-size: 12px;
@@ -213,16 +212,13 @@ pre{
 	background-color: #e0e0e0 !important;
 }
 
-
-
-
-
 .progress-bar{
 	margin:0;
 	padding:0;
 	float:left;
 	height:100%;
 	background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+	background-size: 40px 40px;
 }
 
 
