@@ -198,6 +198,7 @@ pre{
     color: white;
     text-align: center;
     font-size: 12px;
+	border: 1px solid black;
 }
 
 .progress-bar-graph{
